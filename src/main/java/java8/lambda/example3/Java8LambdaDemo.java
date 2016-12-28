@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class Java7LambdaDemo {
+public class Java8LambdaDemo {
 
 	public static void main(String[] args) {
 		/*
@@ -25,15 +25,7 @@ public class Java7LambdaDemo {
 		
 		//Task 1 - Sort City by cityName
 		System.out.println("------------Sort City by cityName------------");
-		Collections.sort(list, new Comparator<City>() {
-
-			@Override
-			public int compare(City o1, City o2) {
-				//ascending order of city name
-				return o1.getCityName().compareTo(o2.getCityName());
-			}
-			
-		});
+		Collections.sort(list, (o1, o2) ->  o1.getCityName().compareTo(o2.getCityName()));
 		
 		//Task 2 - Display all the cities
 		System.out.println("------------Display all the cities------------");
@@ -41,33 +33,14 @@ public class Java7LambdaDemo {
 		
 		//Task 3 - Filter all cities starting with letter M
 		System.out.println("------------Filter all cities starting with letter M------------");
-		displayFilteredCities(list, new Filter() {
-			
-			@Override
-			public boolean doFilter(City c) {
-				return c.getCityName().startsWith("M");
-			}
-		});
+		displayFilteredCities(list, (City c) -> c.getCityName().startsWith("M"));
 		
 		System.out.println("------------Filter all cities with rating 4 and above------------");
-		displayFilteredCities(list, new Filter() {
-			
-			@Override
-			public boolean doFilter(City c) {
-				return c.getRating()>=4;
-			}
-		});
+		displayFilteredCities(list, ( c) ->  c.getRating()>=4);
 		
 		//Task 4 - Filter all cities in country India
 		System.out.println("------------Filter all cities in country India------------");
-		displayFilteredCities(list, new Filter() {
-			
-			@Override
-			public boolean doFilter(City c) {
-				return c.getCountryName().equalsIgnoreCase("India");
-				
-			}
-		});
+		displayFilteredCities(list, ( c) -> c.getCountryName().equalsIgnoreCase("India"));
 		
 	}
 
@@ -86,6 +59,3 @@ public class Java7LambdaDemo {
 
 }
 
-interface Filter{
-	boolean doFilter(City c);
-}
